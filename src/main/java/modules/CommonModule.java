@@ -1,8 +1,9 @@
 package modules;
 
-public interface CommonModule {
+import java.io.File;
 
-    public boolean chechExtention(String extention);
+public interface CommonModule {
+    public boolean checkExtention(String extention);
 
     public void chooseFunction(String name);
 }
