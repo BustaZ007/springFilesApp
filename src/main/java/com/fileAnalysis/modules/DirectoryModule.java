@@ -1,14 +1,15 @@
-package modules;
+package com.fileAnalysis.modules;
 
 import java.io.File;
 import java.util.Scanner;
 
 public class DirectoryModule implements CommonModule {
-    File file;
+    private File file;
 
     public boolean checkExtention(String extention) {
-        file = new File(extention);
-        return file.isDirectory();
+        file = new File("/Users/pavelzaborin/MWA/" + extention);
+        boolean a = file.isDirectory();
+        return a;
     }
 
     public void chooseFunction(String name) {
@@ -16,12 +17,13 @@ public class DirectoryModule implements CommonModule {
             file = new File("/Users/pavelzaborin/MWA/" + name);
             while (true){
                 Scanner in = new Scanner(System.in);
-                System.out.print("Your file it's directory. Input number of function, which you like:\n" +
+                System.out.print(" \nYour file it's directory. Input number of function, which you like:\n" +
                         "1 - List of files on this directory\n" +
-                        "2 - Look total size of this directory");
+                        "2 - Look total size of this directory\n" +
+                        "3 - Exit from this module\n");
                 int num = in.nextInt();
-                while (num != 1 && num != 2){
-                    System.out.println("Wrong number, try again: ");
+                while (num != 1 && num != 2 && num != 3){
+                    System.out.println("Wrong number, try again: \n");
                     num = in.nextInt();
                 }
                 switch (num){
@@ -31,37 +33,39 @@ public class DirectoryModule implements CommonModule {
                     case 2:
                         writeSize();
                         break;
+                    case 3:
+                        return;
                 }
             }
         }
         catch (Exception e){
-            System.out.println("SOMETHING WRONG WITH CHOOSE OPERATION FOR DIRECTORY");
+            System.out.println("SOMETHING WRONG WITH CHOOSE OPERATION FOR DIRECTORY \n");
         }
     }
     private void writeTree(){
         try {
             File[] files = file.listFiles();
             if (files == null || files.length == 0){
-                System.out.println("In your directory no files");
+                System.out.println("In your directory no files \n");
             }
             else {
-                System.out.println("Files in your directory: ");
+                System.out.println(" \nFiles in your directory: ");
                 for (File f : files){
                     System.out.println(f.getName());
                 }
             }
         }
         catch (Exception e){
-            System.out.println("SOMETHING WRONG WITH LOOK FILES IN THIS DIRECTORY");
+            System.out.println(" \nSOMETHING WRONG WITH LOOK FILES IN THIS DIRECTORY \n");
         }
     }
 
     private void writeSize(){
         try {
-            System.out.println("Total size of your directory is " + getDirSize(file) + " bytes");
+            System.out.println(" \nTotal size of your directory is " + getDirSize(file) + " bytes \n");
         }
         catch (Exception e){
-            System.out.println("SOMETHING WRONG WITH LOOK SIZE OF THIS DIRECTORY");
+            System.out.println(" \nSOMETHING WRONG WITH LOOK SIZE OF THIS DIRECTORY \n");
         }
     }
 
@@ -83,7 +87,7 @@ public class DirectoryModule implements CommonModule {
             return size;
         }
         catch (Exception e ){
-            System.out.println("SOMETHING WRONG WITH LOOK SIZE OF THIS DIRECTORY");
+            System.out.println(" \nSOMETHING WRONG WITH LOOK SIZE OF THIS DIRECTORY \n");
             return -1;
         }
     }

@@ -1,6 +1,4 @@
-package modules;
-
-import java.io.File;
+package com.fileAnalysis.modules;
 
 public interface CommonModule {
     public boolean checkExtention(String extention);

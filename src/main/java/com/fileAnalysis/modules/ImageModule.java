@@ -1,4 +1,4 @@
-package modules;
+package com.fileAnalysis.modules;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Directory;
@@ -26,13 +26,14 @@ public class ImageModule implements CommonModule {
             file = new File("/Users/pavelzaborin/MWA/" + name);
             while (true){
                 Scanner in = new Scanner(System.in);
-                System.out.print("Your file it's image. Input number of function, which you like:\n" +
+                System.out.print(" \nYour file it's image. Input number of function, which you like:\n" +
                         "1 - Size information output\n" +
                         "2 - Exif information output\n" +
-                        "3 - Display image");
+                        "3 - Display image \n" +
+                        "4 - Exit from this module \n");
                 int num = in.nextInt();
-                while (num != 1 && num != 2 && num != 3){
-                    System.out.println("Wrong number, try again: ");
+                while (num != 1 && num != 2 && num != 3 && num != 4){
+                    System.out.println(" \nWrong number, try again:  \n");
                     num = in.nextInt();
                 }
                 switch (num){
@@ -45,11 +46,13 @@ public class ImageModule implements CommonModule {
                     case 3:
                         displayImage();
                         break;
+                    case 4:
+                        return;
                 }
             }
         }
         catch (Exception e){
-            System.out.println("SOMETHING WRONG WITH CHOOSE OPERATION FOR IMAGE");
+            System.out.println(" \nSOMETHING WRONG WITH CHOOSE OPERATION FOR IMAGE \n");
         }
     }
 
@@ -59,7 +62,7 @@ public class ImageModule implements CommonModule {
             Iterable<Directory> m = metadata.getDirectories();
             for (Directory d : m){
                 if (d.toString().contains("Exif")){
-                    System.out.println(d);
+                    System.out.println(" \n" + d);
                     Collection<Tag> t = d.getTags();
                     for (Tag tag : t){
                         System.out.println("\t" + tag.getTagName() + " : " + tag.getDescription());
@@ -68,7 +71,7 @@ public class ImageModule implements CommonModule {
             }
         }
         catch (Exception e){
-            System.out.println("SOMETHING WRONG WITH EXIF INFORMATION ON IMAGE");
+            System.out.println(" \nSOMETHING WRONG WITH EXIF INFORMATION ON IMAGE \n");
         }
 
     }
@@ -76,10 +79,10 @@ public class ImageModule implements CommonModule {
     private void writeSize(){
         try {
             MBFImage image = ImageUtilities.readMBF(file);
-            System.out.println("Size of image: " +  image.getWidth() + "x" + image.getHeight());
+            System.out.println(" \nSize of image: " +  image.getWidth() + "x" + image.getHeight());
         }
         catch (Exception e){
-            System.out.println("SOMETHING WRONG WITH GETTING SIZE ON IMAGE");
+            System.out.println(" \nSOMETHING WRONG WITH GETTING SIZE ON IMAGE \n");
         }
     }
 
@@ -89,7 +92,7 @@ public class ImageModule implements CommonModule {
             DisplayUtilities.display(image);
         }
         catch (Exception e){
-            System.out.println("SOMETHING WRONG WITH DISPLAYING IMAGE");
+            System.out.println(" \nSOMETHING WRONG WITH DISPLAYING IMAGE \n");
         }
     }
 }

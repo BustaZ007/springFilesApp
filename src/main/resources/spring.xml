@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+
+
+    <util:map id="modulesMap">
+        <entry key="directory" value-ref="DirectoryModule"/>
+        <entry key="image" value-ref="ImageModule"/>
+        <entry key="Music" value-ref="MusicModule"/>
+        <entry key="text" value-ref="TextModule"/>
+    </util:map>
+
+
+    <bean id="App" class="com.fileAnalysis.App" >
+        <constructor-arg ref="modulesMap"/>
+    </bean>
+
+    <bean id="DirectoryModule" class="com.fileAnalysis.modules.DirectoryModule" scope="prototype">
+    </bean>
+    <bean id="ImageModule" class="com.fileAnalysis.modules.ImageModule" scope="prototype">
+    </bean>
+    <bean id="MusicModule" class="com.fileAnalysis.modules.MusicModule" scope="prototype">
+    </bean>
+    <bean id="TextModule" class="com.fileAnalysis.modules.TextModule" scope="prototype">
+    </bean>
+
+</beans>
